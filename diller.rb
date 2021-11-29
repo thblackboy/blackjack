@@ -11,29 +11,8 @@ class Diller < Player
   end
 
   def logic(deck)
-    if @score < 17 && @status != "finish"
+    if @hand.score < 17 && @status != "finish"
       take_card(deck)
-    else
-      skip
-    end
-  end
-
-  def cards
-    if @hide_cards
-      my_cards = ""
-      @cards.each {my_cards += "* "}
-      my_cards
-    else
-      super
-    end
-  end
-
-  def to_s
-    if @hide_cards
-      "Карты диллера #{cards}"
-
-    else
-      "Карты диллера: #{cards} Счет диллера: #{@score}"
     end
   end
 

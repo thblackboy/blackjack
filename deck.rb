@@ -7,7 +7,7 @@ class Deck
     @cards = []
     CARD_NAMES.each do |card_name|
       CARD_TYPES.each do |card_type|
-        @cards << Cards.new(card_name, card_type)
+        @cards << Card.new(card_name, card_type)
       end
     end
   end
@@ -15,10 +15,6 @@ class Deck
 
   def randomize_deck
     @deck = @cards.sort_by{rand}
-  end
-
-  def cards
-    @cards
   end
 
   def take_card

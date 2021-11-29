@@ -1,42 +1,28 @@
 class Player
-  attr_reader :balance, :name, :status, :score
+  attr_reader :balance, :name
   def initialize(name)
     @name = name
     @balance = 100
   end
 
   def play(deck)
-    @cards = []
-    @score = 0
-    @tous_count = 0
-    2.times {take_card(deck)}
+    pay
+    @hand = Hand.new
+    2.times {@hand.take(deck)}
     @status = "start"
   end
 
   def take_card(deck)
-    card = deck.take_card
-    @cards << card
-    @tous_count +=1 if card.name == "T"
-    @score += card.value
+    @hand.take(deck)
     @status = "finish"
-    check_score
   end
 
-  def check_score
-    if @score > 21
-      if @tous_count > 0
-        @score -=10
-        @tous_count -=1
-      else
-        @status = "finish"
-      end
-    end
+  def show_hand
+    @hand.show_cards
   end
 
-  def cards
-    my_cards = ""
-    @cards.each {|card| my_cards += card.to_s}
-    my_cards
+  def show_score
+    @hand.score
   end
 
 
@@ -45,28 +31,9 @@ class Player
     @balance -=10
   end
 
-  def pay?
-    pay
-    true
-  rescue RuntimeError => e
-    puts e.message
-    false
-  end
 
   def get_money(money)
     @balance += money
-  end
-
-  def skip
-    @status = "skip"
-  end
-
-  def open_cards
-    @status = "finish"
-  end
-
-  def to_s
-    "Ваши карты : #{cards} Ваш счет: #{@score}"
   end
 
 

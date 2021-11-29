@@ -1,4 +1,4 @@
-class Cards
+class Card
   attr_reader :name, :value
 
 
