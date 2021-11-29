@@ -40,7 +40,6 @@ class BlackJack
     puts "Выигрыш: #{@game.jackpot}"
   end
 
-
   def command_list
     get_balances
     jackpot
